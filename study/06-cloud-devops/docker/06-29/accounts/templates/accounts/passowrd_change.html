@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}비밀번호 변경 | Django Auth{% endblock %}
+
+{% block content %}
+<div class="card auth-card shadow-lg border-0">
+    <div class="auth-header text-center">
+        <div class="auth-icon"><i class="bi bi-key-fill"></i></div>
+        <h3 class="mb-1">비밀번호 변경</h3>
+        <p class="mb-0 opacity-75">안전한 비밀번호로 변경해주세요.</p>
+    </div>
+
+    <div class="card-body p-4 p-md-5">
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <div class="password-wrapper">
+                        {{ field }}
+                        <button class="toggle-password" type="button" aria-label="비밀번호 보기">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text|safe }}</div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="{% url 'profile' %}" class="btn btn-outline-secondary">취소</a>
+                <button class="btn btn-primary" type="submit">변경완료</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('input').forEach(function (input) {
+        input.classList.add('form-control');
+    });
+
+    document.querySelectorAll('.password-wrapper').forEach(function (wrapper) {
+        const input = wrapper.querySelector('input');
+        const button = wrapper.querySelector('.toggle-password');
+        const icon = button ? button.querySelector('i') : null;
+        if (!input || !button || !icon) return;
+
+        button.addEventListener('click', function () {
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            icon.classList.toggle('bi-eye', !isPassword);
+            icon.classList.toggle('bi-eye-slash', isPassword);
+        });
+    });
+});
+</script>
+{% endblock %}

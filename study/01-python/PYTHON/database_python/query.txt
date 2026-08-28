@@ -1,0 +1,41 @@
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(20),
+    point INT DEFAULT 0,
+    grade VARCHAR(20) DEFAULT 'Bronze',
+    join_date DATE NOT NULL,
+    last_purchase_date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) COMMENT '고객 정보';
+
+CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT DEFAULT 0,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) COMMENT '상품 정보';
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10, 2) DEFAULT 0,
+    status VARCHAR(20) DEFAULT 'Pending',
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+) COMMENT '주문 정보';
+
+CREATE TABLE order_details (
+    detail_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL,
+    subtotal DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+) COMMENT '주문 상세 정보';

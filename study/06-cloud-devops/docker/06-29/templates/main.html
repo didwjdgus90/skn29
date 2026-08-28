@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}메인 | Django Auth{% endblock %}
+
+{% block content %}
+<section class="hero-card text-center">
+    {% if user.is_authenticated %}
+        <div class="icon-circle mx-auto mb-3">
+            <i class="bi bi-person-check-fill"></i>
+        </div>
+        <h1 class="display-5 fw-bold mb-3">{{ user.nickname|default:user.username }}님, 환영합니다!</h1>
+        <p class="lead text-muted mb-4">로그인에 성공했습니다. 마이페이지와 세션 정보를 확인해보세요.</p>
+        <div class="d-flex gap-2 justify-content-center flex-wrap">
+            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-person-circle me-1"></i>마이페이지
+            </a>
+            <a href="{% url 'session_info' %}" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-clock-history me-1"></i>세션 정보
+            </a>
+            <a href="{% url 'notice_list' %}" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-megaphone me-1"></i>공지사항
+            </a>
+        </div>
+    {% else %}
+        <div class="icon-circle mx-auto mb-3">
+            <i class="bi bi-shield-lock-fill"></i>
+        </div>
+        <h1 class="display-5 fw-bold mb-3">Django 인증 프로젝트</h1>
+        <p class="lead text-muted mb-4">회원가입, 로그인, 로그아웃, 마이페이지, 비밀번호 변경 기능을 실습할 수 있습니다.</p>
+        <div class="d-flex gap-2 justify-content-center flex-wrap">
+            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-person-plus me-1"></i>회원가입
+            </a>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-box-arrow-in-right me-1"></i>로그인
+            </a>
+        </div>
+    {% endif %}
+</section>
+
+<div class="row g-4 mt-4">
+    <div class="col-md-4">
+        <div class="feature-item h-100">
+            <i class="bi bi-person-badge"></i>
+            <span>커스텀 유저 모델</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-item h-100">
+            <i class="bi bi-key"></i>
+            <span>비밀번호 변경</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-item h-100">
+            <i class="bi bi-database-check"></i>
+            <span>세션 정보 확인</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
