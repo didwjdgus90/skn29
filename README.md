@@ -109,11 +109,14 @@ https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN29-2nd-1Team
 Repository:  
 https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN29-1st-4team
 
-### WaterCare
+### WaterBridge
 
-SKN29 최종 팀 프로젝트로 진행한 정수기 고객 케어 서비스입니다.
+SKN29 최종 팀 프로젝트로 진행한 AI 기반 정수기 고객 케어 플랫폼입니다.
 
-프로젝트 코드는 학습 저장소에 복제하지 않고 별도의 팀 Repository에서 관리합니다.
+- 공식 팀 Repository: `SKNETWORKS-FAMILY-AICAMP/SKN29-FINAL-4TEAM`
+- 초기 기획 기록: [WaterBridge Project Notes](./study/09-project-notes/WaterBridge/)
+
+프로젝트 전체 소스코드는 이 학습 저장소에 복제하지 않고 공식 팀 Repository에서 관리합니다.
 
 ---
 
